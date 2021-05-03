@@ -10,7 +10,7 @@ export class CvCreateComponent implements OnInit {
   CVForm = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
-    work: new FormControl(''),
+    education: new FormControl(''),
     skill: new FormControl(''),
     image: new FormControl(''),
     video: new FormControl(''),
