@@ -1,1 +1,49 @@
-<p>cv-create works!</p>
+<app-cv></app-cv>
+
+<h3 id="cvheader">Create your cv here</h3>
+
+  <form [formGroup]="CVForm" (ngSubmit)="onSubmit()">
+
+    <p>
+    <label>
+      Name:
+      <input type="text" formControlName="name">
+    </label>
+</p>
+    <p>
+    <label>
+      Description:
+      <textarea formControlName="description">
+      </textarea>
+    </label>
+    </p>
+
+    <p>
+    <label>
+      Education:
+      <textarea formControlName="education">
+      </textarea>
+    </label>
+    </p>
+    <p>
+    <label>
+      Skill:
+      <textarea formControlName="skill">
+      </textarea>    </label>
+</p>
+    <p>
+    <label>
+      Image:
+      <input type="image" formControlName="image">
+    </label>
+    </p>
+    <p>
+    <label>
+      Video:
+      <input type="file" formControlName="video">
+    </label>
+    </p>
+
+    <button type="submit" [disabled]="!CVForm.valid">Submit</button>
+
+  </form>
