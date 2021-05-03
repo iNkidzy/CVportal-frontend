@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CvService} from './shared/cv.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-cv',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cv.component.scss']
 })
 export class CvComponent implements OnInit {
-
-  constructor() { }
+cv = new FormControl('');
+cvs: string[] = [];
+  constructor(private cvService: CvService) { }
 
   ngOnInit(): void {
+    this.cvService.listenForCvs()
+      .subscribe( cv => {
+        this.cvs.push(cv);
+      });
   }
 
 }
