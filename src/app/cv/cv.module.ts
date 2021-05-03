@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CvRoutingModule } from './cv-routing.module';
 import { CvComponent } from './cv.component';
 import { CvCreateComponent } from './cv-create/cv-create.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -11,9 +12,10 @@ import { CvCreateComponent } from './cv-create/cv-create.component';
     CvComponent,
     CvCreateComponent
   ],
-  imports: [
-    CommonModule,
-    CvRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        CvRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class CvModule { }
