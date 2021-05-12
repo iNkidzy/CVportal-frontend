@@ -1,15 +1,15 @@
 <app-cv></app-cv>
 <div style="text-align: center;">
 <h3 id="cvheader">Create your cv here</h3>
-  <form [formGroup]="CVForm" (ngSubmit)="onSubmit()">
+  <form  [formGroup]="CVForm" (ngSubmit)="onSubmit()">
     <p>
-    <label>
+    <label style="color: pink; font-size: 25px;">
       Name:
       <input type="text" formControlName="name">
     </label>
 </p>
     <p>
-    <label>
+    <label style="color: pink; font-size: 25px;" >
       Description:
       <textarea formControlName="description">
       </textarea>
@@ -17,32 +17,32 @@
     </p>
 
     <p>
-    <label>
+    <label style="color: pink; font-size: 25px;">
       Education:
       <textarea formControlName="education">
       </textarea>
     </label>
     </p>
     <p>
-    <label>
+    <label style="color: pink; font-size: 25px;">
       Skill:
       <textarea formControlName="skill">
       </textarea>    </label>
 </p>
     <p>
-    <label>
+    <label style="font-size: 25px; color: pink">
       Image:
       <input type="file" formControlName="image">
     </label>
     </p>
     <p>
-    <label>
+    <label style="font-size: 25px; color: pink;">
       Video:
       <input type="file" formControlName="video">
     </label>
     </p>
 
-    <button type="submit" [disabled]="!CVForm.valid">Submit</button>
+    <button style="color: pink; background-color: deepskyblue; font-size: 40px; border-radius: 5px; border-color: blueviolet"  type="submit" [disabled]="!CVForm.valid">Submit</button>
 
   </form>
 </div>
