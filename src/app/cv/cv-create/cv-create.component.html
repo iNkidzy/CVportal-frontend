@@ -1,5 +1,5 @@
 <app-cv></app-cv>
-
+<div style="text-align: center;">
 <h3 id="cvheader">Create your cv here</h3>
 
   <form [formGroup]="CVForm" (ngSubmit)="onSubmit()">
@@ -34,7 +34,7 @@
     <p>
     <label>
       Image:
-      <input type="image" formControlName="image">
+      <input type="file" formControlName="image">
     </label>
     </p>
     <p>
@@ -47,3 +47,4 @@
     <button type="submit" [disabled]="!CVForm.valid">Submit</button>
 
   </form>
+</div>
