@@ -1,3 +1,4 @@
+<div *ngIf="nickname">
 <div style="background: paleturquoise">
   <p>chat works YaaaY!</p>
 
@@ -15,4 +16,19 @@
  Here: {{message}}
 </h4>
 
+</div>
+</div>
+<div *ngIf="!nickname">
+  <div style="background: paleturquoise">
+    <p>chat works YaaaY!</p>
+
+    <label>
+      Enter Nickname:
+      <input type="text" [formControl]="nickNameFC">
+    </label>
+    <h5> msg:{{message.value | json}}</h5>
+
+    <button (click)="sendNickname()">Send Message</button>
+
+  </div>
 </div>

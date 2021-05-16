@@ -10,11 +10,11 @@ export class ChatService {
 
   constructor(private socket: SocketChat) { }
 
-  sendMessage(msg: string): void {
+  sendMessage(msg: string): void { // sends a message
     this.socket.emit('message', msg);
   }
 
-  listenForMessages(): Observable<string> {
+  listenForMessages(): Observable<string> { // listens for new messages
     return this.socket
       .fromEvent<string>('newMessage');
   }
@@ -23,6 +23,11 @@ export class ChatService {
     return this.socket
       .fromEvent<string[]>('allMessages');
   }
+
+  sendNickname(nickname: string): void {
+    this.socket.emit('nickname', nickname);
+  }
+
 
   disconnect(): void {
     this.socket.disconnect();
