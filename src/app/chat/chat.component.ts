@@ -17,7 +17,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: ChatMessage[] = [];
   unsubscribe$ = new Subject(); // unsubscribes the subscription
   clients$: Observable<ChatClient[]> | undefined;
-  chatClient: ChatClient | undefined; // includes nickname,therefore deleted
+  chatClient: ChatClient | undefined;
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
@@ -30,32 +30,33 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log('listens for messages');
         this.messages.push(message);
     });
-    this.chatService.connect();
-  }
-  ngOnDestroy(): void {
-    console.log('Destroyed');
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-    this.chatService.disconnect();
-  }
-
-  sendMessage(): void {
-    console.log(this.message.value);
-    this.chatService.sendMessage(this.message.value);
-  }
-
-  sendNickname(): void {
-    if (this.nickNameFC.value){
     this.chatService.listenForWelcome()
       .pipe(
         takeUntil(this.unsubscribe$)
       )
       .subscribe(welcome =>
       {
-        this.chatService.sendNickname(this.nickNameFC.value);
-        this.chatClient = welcome.client;
+        this.messages = welcome.messages;
+        this.chatClient = this.chatService.chatClient = welcome.client;
+        // use NGXS later rn its simple state using Singleton Service
       });
-    this.chatService.sendNickname(this.nickNameFC.value);
+    if (this.chatService.chatClient){
+      this.chatService.sendNickname(this.chatService.chatClient.nickname);
+    }
+
+  }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  sendMessage(): void {
+    console.log(this.message.value);
+    this.chatService.sendMessage(this.message.value);
+  }
+  sendNickname(): void {
+    if (this.nickNameFC.value){
+      this.chatService.sendNickname(this.nickNameFC.value);
     }
   }
 }
