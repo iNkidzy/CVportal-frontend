@@ -1,5 +1,10 @@
 <p>chat works YaaaY!</p>
 
+
+<h4 *ngFor="let message of messages">
+  {{message}}
+</h4>
+
 <label>
   Message:
   <input type="text" [formControl]="message">
@@ -9,6 +14,4 @@
 
 <button (click)="sendMessage()">Send Message</button>
 
-<h4 *ngFor="let message of messages">
-  {{message}}
-</h4>
+

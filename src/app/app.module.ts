@@ -5,22 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {Socket, SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
-import {HttpClientModule} from '@angular/common/http';
 
 // Delete this and .forRoot(config) later
-const config: SocketIoConfig = {url: 'https://localhost:3000', options: {} };
-const configChatBackend: SocketIoConfig = {url: 'https://localhost:3100', options: {} };
+// const config: SocketIoConfig = {url: 'http://localhost:3000', options: {} };
+// const configChatBackend: SocketIoConfig = {url: 'http://localhost:3100', options: {} };
 
 @Injectable()
 export class SocketCV extends Socket {
   constructor() {
-    super({url: 'https://localhost:3000', options: {} });
+    super({url: 'http://localhost:3000', options: {} });
   }
 }
 @Injectable()
 export class SocketChat extends Socket {
   constructor() {
-    super({url: 'https://localhost:3100', options: {} });
+    super({url: 'http://localhost:3100', options: {} });
   }
 }
 
@@ -31,7 +30,7 @@ export class SocketChat extends Socket {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(configChatBackend)
+    SocketIoModule,
   ],
   providers: [SocketCV, SocketChat],
   bootstrap: [AppComponent]
