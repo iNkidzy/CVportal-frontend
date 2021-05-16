@@ -33,11 +33,13 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log('gets all messages');
         this.messages = message;
       });
+    this.chatService.connect();
   }
   ngOnDestroy(): void {
     console.log('Destroyed');
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.chatService.disconnect();
   }
 
   sendMessage(): void {

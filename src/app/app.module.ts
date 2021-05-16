@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {Socket, SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import {ReactiveFormsModule} from '@angular/forms';
 
 // Delete this and .forRoot(config) later
 // const config: SocketIoConfig = {url: 'http://localhost:3000', options: {} };
@@ -31,6 +32,7 @@ export class SocketChat extends Socket {
     BrowserModule,
     AppRoutingModule,
     SocketIoModule,
+    ReactiveFormsModule,
   ],
   providers: [SocketCV, SocketChat],
   bootstrap: [AppComponent]
