@@ -27,8 +27,10 @@ export class ChatService {
   sendNickname(nickname: string): void {
     this.socket.emit('nickname', nickname);
   }
-
-
+  listenForClients(): Observable<string[]> { // listens for clients
+    return this.socket
+      .fromEvent<string[]>('clients');
+  }
   disconnect(): void {
     this.socket.disconnect();
   }

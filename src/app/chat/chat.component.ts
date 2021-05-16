@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ChatService} from './shared/chat.service';
-import {Subject, Subscription} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -15,9 +15,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: string[] = [];
   unsubscribe$ = new Subject(); // unsubscribes the subscription
   nickname: string | undefined;
+  clients$: Observable<string[]> | undefined;
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
+    this.clients$ = this.chatService.listenForClients();
     this.chatService.listenForMessages()
       .pipe(
         takeUntil(this.unsubscribe$)
