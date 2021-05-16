@@ -1,1 +1,10 @@
-<p>chat works!</p>
+<p>chat works YaaaY!</p>
+
+<label>
+  Message:
+  <input type="text" [formControl]="message">
+</label>
+
+<h3>{{message.value}}</h3>
+
+<button (click)="sendMessage()">Send Message</button>
