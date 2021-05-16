@@ -16,6 +16,11 @@ export class ChatService {
 
   listenForMessages(): Observable<string> {
     return this.socket
-      .fromEvent<string>('messages');
+      .fromEvent<string>('newMessage');
+  }
+
+  getAllMessages(): Observable<string[]> { // stores data on memory backend
+    return this.socket
+      .fromEvent<string[]>('allMessages');
   }
 }

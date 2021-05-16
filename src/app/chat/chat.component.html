@@ -1,17 +1,18 @@
-<p>chat works YaaaY!</p>
+<div style="background: paleturquoise">
+  <p>chat works YaaaY!</p>
 
-<h4 *ngFor="let message of messages">
-  {{message}}
-</h4>
-
-<label>
+  <label>
   Message:
   <input type="text" [formControl]="message">
 </label>
 
-<h3>{{message.value}}</h3>
+<h5> msg:{{message.value | json}}</h5>
 
-<h5>{{messages | json}}</h5>
+
 <button (click)="sendMessage()">Send Message</button>
 
+<h4 *ngFor="let message of messages">
+ Here: {{message}}
+</h4>
 
+</div>
