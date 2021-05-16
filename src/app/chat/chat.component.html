@@ -1,6 +1,5 @@
 <p>chat works YaaaY!</p>
 
-
 <h4 *ngFor="let message of messages">
   {{message}}
 </h4>
@@ -12,6 +11,7 @@
 
 <h3>{{message.value}}</h3>
 
+<h5>{{messages | json}}</h5>
 <button (click)="sendMessage()">Send Message</button>
 
 
