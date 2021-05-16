@@ -12,8 +12,8 @@
 
 <button (click)="sendMessage()">Send Message</button>
 
-<h4 *ngFor="let message of messages">
- Here: {{message}}
+<h4 *ngFor="let chatMessage of messages">
+  User {{chatMessage.sender.nickname}} says: {{chatMessage.message}}
 </h4>
 
 </div>

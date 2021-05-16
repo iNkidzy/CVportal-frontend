@@ -3,6 +3,7 @@ import {Socket} from 'ngx-socket-io';
 import {Observable} from 'rxjs';
 import {SocketChat} from '../../app.module';
 import {ChatClient} from './chat-client.model';
+import {ChatMessage} from './chat-message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,14 @@ export class ChatService {
     this.socket.emit('message', msg);
   }
 
-  listenForMessages(): Observable<string> { // listens for new messages
+  listenForMessages(): Observable<ChatMessage> { // listens for new messages, update ChatMessage makes it so we know who the sender was
     return this.socket
-      .fromEvent<string>('newMessage');
+      .fromEvent<ChatMessage>('newMessage');
   }
 
-  getAllMessages(): Observable<string[]> { // stores data on memory backend
+  getAllMessages(): Observable<ChatMessage[]> { // stores data on memory backend
     return this.socket
-      .fromEvent<string[]>('allMessages');
+      .fromEvent<ChatMessage[]>('allMessages');
   }
 
   sendNickname(nickname: string): void {
