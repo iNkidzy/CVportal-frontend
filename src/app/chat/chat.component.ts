@@ -9,9 +9,14 @@ import {ChatService} from './shared/chat.service';
 })
 export class ChatComponent implements OnInit {
   message = new FormControl('');
+  messages: string[] = [];
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
+    this.chatService.listenForMessages()
+      .subscribe(message => {
+      this.messages.push(message);
+    });
   }
 
   sendMessage(): void {
