@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {SocketChat} from '../../app.module';
 import {ChatClient} from './chat-client.model';
 import {ChatMessage} from './chat-message.model';
+import {WelcomeDto} from './welcome.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,12 @@ export class ChatService {
     return this.socket
       .fromEvent<ChatClient[]>('clients');
   }
+
+  listenForWelcome(): Observable<WelcomeDto> { // listens for welcome package
+    return this.socket
+      .fromEvent<WelcomeDto>('welcome');
+  }
+
   disconnect(): void {
     this.socket.disconnect();
   }
