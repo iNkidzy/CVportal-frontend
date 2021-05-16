@@ -1,6 +1,10 @@
 <div *ngIf="chatClient">
-  <h5> Helloo You are connected! By setting your nickname we get your name, msgs and id, fun! </h5>
-<div style="background: paleturquoise">
+
+  <div *ngIf="error$ | async as error" style="color: darkred">
+    {{error}}
+  </div>
+
+  <div style="background: paleturquoise">
   <p>chat works YaaaY!</p>
 
   <label>

@@ -41,6 +41,11 @@ export class ChatService {
       .fromEvent<WelcomeDto>('welcome');
   }
 
+  listenForErrors(): Observable<string> { // listens for error msgs
+    return this.socket
+      .fromEvent<string>('error');
+  }
+
   disconnect(): void {
     this.socket.disconnect();
   }
