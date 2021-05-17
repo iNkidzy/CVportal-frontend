@@ -1,18 +1,20 @@
-<div *ngIf="chatClient">
+<div *ngIf="error$ | async as error" style="color: darkred">
+  {{error}}
+</div>
+<!--<div *ngIf="!socketId" style="color: darkred">
+  You are not connected!
+</div> -->
 
+<div *ngIf="chatClient">
   <div style="background: paleturquoise">
   <p>chat works YaaaY!</p>
-
   <label>
   Message:
   <input type="text" [formControl]="messageFC">
 </label>
 
-<h5> msg:{{messageFC.value | json}}</h5>
-
-
 <button (click)="sendMessage()">Send Message</button>
-
+    <h5> msg:{{messageFC.value | json}}</h5>
 <h5 *ngIf="clientsTyping.length > 0"
     style="color: lightslategray">
   Clients Typing:
@@ -22,11 +24,10 @@
   </span>
 </h5>
 
-    <h4 *ngFor="let chatMessage of messages">
-  User {{chatMessage.sender.nickname}} says: {{chatMessage.message}}
-</h4>
-
-</div>
+ </div>
+  <h4 *ngFor="let chatMessage of messages">
+    User {{chatMessage.sender.nickname}} says: {{chatMessage.message}}
+  </h4>
 </div>
 <div *ngIf="!chatClient">
   <div style="background: paleturquoise">
@@ -36,9 +37,9 @@
       Enter Nickname:
       <input type="text" [formControl]="nickNameFC">
     </label>
-    <h5> msg:{{messageFC.value | json}}</h5>
+    <h5> nickname:{{nickNameFC.value | json}}</h5>
 
-    <button (click)="sendNickname()">Send Message</button>
+    <button (click)="sendNickname()">Send Nickname</button>
 
   </div>
 </div>
@@ -50,6 +51,4 @@
   </li>
 </ul>
 </div>
-<div *ngIf="error$ | async as error" style="color: darkred">
-  {{error}}
-</div>
+
