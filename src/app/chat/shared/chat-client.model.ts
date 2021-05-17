@@ -3,5 +3,5 @@ export interface ChatClient {
   // identical to the one on the backend in order to be able to send  it over the socket!:)
   id: string;
   nickname: string;
-  typing: boolean;
+  typing?: boolean;
 }

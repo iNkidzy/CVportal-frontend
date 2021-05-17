@@ -76,6 +76,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   sendMessage(): void {
     console.log(this.messageFC.value);
     this.chatService.sendMessage(this.messageFC.value);
+    this.messageFC.patchValue('');
   }
   sendNickname(): void {
     if (this.nickNameFC.value) {
