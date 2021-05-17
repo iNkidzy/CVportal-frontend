@@ -18,9 +18,18 @@ export class ChatService {
     this.socket.emit('message', msg);
   }
 
+  sendTyping(typing: boolean): void  {
+    this.socket.emit('typing', typing);
+
+  }
+
   listenForMessages(): Observable<ChatMessage> { // listens for new messages, update ChatMessage makes it so we know who the sender was
     return this.socket
       .fromEvent<ChatMessage>('newMessage');
+  }
+  listenForClientTyping(): Observable<ChatClient> { // listens for welcome package
+    return this.socket
+      .fromEvent<ChatClient>('clientTyping');
   }
 
   getAllMessages(): Observable<ChatMessage[]> { // stores data on memory backend
@@ -53,4 +62,6 @@ export class ChatService {
   connect(): void {
     this.socket.connect();
   }
+
+
 }

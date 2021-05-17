@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ChatService} from './shared/chat.service';
 import {Observable, Subject, Subscription} from 'rxjs';
-import {take, takeUntil} from 'rxjs/operators';
+import {debounceTime, take, takeUntil} from 'rxjs/operators';
 import {ChatClient} from './shared/chat-client.model';
 import {ChatMessage} from './shared/chat-message.model';
+
 
 @Component({
   selector: 'app-chat',
@@ -12,18 +13,27 @@ import {ChatMessage} from './shared/chat-message.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  message = new FormControl('');
+  messageFC = new FormControl('');
   nickNameFC = new FormControl('');
   messages: ChatMessage[] = [];
   unsubscribe$ = new Subject(); // unsubscribes the subscription
   clients$: Observable<ChatClient[]> | undefined;
   chatClient: ChatClient | undefined;
   error$: Observable<string> | undefined;
+  clientsTyping: ChatClient[] = [];
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.clients$ = this.chatService.listenForClients();
     this.error$ = this.chatService.listenForErrors();
+    this.messageFC.valueChanges
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        debounceTime(500)
+      )
+      .subscribe((value) => {
+        this.chatService.sendTyping(value.length > 0);
+      });
     this.chatService.listenForMessages()
       .pipe(
         takeUntil(this.unsubscribe$)
@@ -31,7 +41,18 @@ export class ChatComponent implements OnInit, OnDestroy {
       .subscribe(message => {
         console.log('listens for messages');
         this.messages.push(message);
-    });
+      });
+    this.chatService.listenForClientTyping() // under listen for msgs maybe
+      .pipe(
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((chatClient) => {
+        if (chatClient.typing && !this.clientsTyping.find((c) => c.id === chatClient.id)) {
+          this.clientsTyping.push(chatClient);
+        } else {
+          this.clientsTyping = this.clientsTyping.filter((c) => c.id !== chatClient.id);
+        }
+      });
     this.chatService.listenForWelcome()
       .pipe(
         takeUntil(this.unsubscribe$)
@@ -47,17 +68,17 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
 
   }
-  ngOnDestroy(): void {
+    ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
+     }
 
   sendMessage(): void {
-    console.log(this.message.value);
-    this.chatService.sendMessage(this.message.value);
+    console.log(this.messageFC.value);
+    this.chatService.sendMessage(this.messageFC.value);
   }
   sendNickname(): void {
-    if (this.nickNameFC.value){
+    if (this.nickNameFC.value) {
       this.chatService.sendNickname(this.nickNameFC.value);
     }
   }
