@@ -77,9 +77,6 @@ export class ChatService {
       );
   }
 
-
-
-
   disconnect(): void {
     this.socket.disconnect();
   }

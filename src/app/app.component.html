@@ -1,12 +1,25 @@
-<div style="text-align: center;">
+<div fxLayout="column" fxFill>
+  <div fxLayout="row" fxFlex="9" fxLayoutGap="330px" fxLayoutAlign="center center" class="nav">
+    <a class="nounderline" routerLink="/" routerLinkActive="active">
+          Welcome to CVNaChi
+      <span class="material-icons">
+            favorite_border
+        </span> </a>
+      <a class="nounderline" routerLink="/cvs" routerLinkActive="active">
+        <span class="material-icons">
+            home
+        </span> </a>
+      <a class="nounderline" routerLink="/cvs/create" routerLinkActive="active">
+        <span class="material-icons">
+            note_add
+        </span> </a>
 
-<br>
-    <h1 style="color: silver"> Welcome to CVNaChi .. </h1>
-  <div>
-  <a style="color: pink" class="nounderline" routerLink="/cvs" routerLinkActive="active">CV</a><br>
-    <a style="color: pink" class="nounderline" routerLink="/cvs/create" routerLinkActive="active">Create new CV</a><br>
-    <a style="color: pink" class="nounderline" routerLink="/chats" routerLinkActive="active">Chat</a>
+      <a class="nounderline" routerLink="/chats" routerLinkActive="active">
+        <span class="material-icons">
+            forum
+        </span> </a>
   </div>
-<router-outlet></router-outlet>
+
+<router-outlet class="router-flex"></router-outlet>
 </div>
 

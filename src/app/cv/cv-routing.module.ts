@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CvComponent } from './cv.component';
 import {CvCreateComponent} from './cv-create/cv-create.component';
 
-const routes: Routes = [{ path: '', component: CvComponent },
+const routes: Routes = [{ path: 'cvs', component: CvComponent },
                         { path: 'create', component: CvCreateComponent }];
 
 @NgModule({

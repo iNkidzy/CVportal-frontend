@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {Socket, SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {SharedModule} from './shared/shared.module';
+
 
 // Delete this and .forRoot(config) later
 // const config: SocketIoConfig = {url: 'http://localhost:3000', options: {} };
@@ -31,6 +35,9 @@ export class SocketChat extends Socket {
     BrowserModule,
     AppRoutingModule,
     SocketIoModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    SharedModule,
   ],
   providers: [SocketCV, SocketChat],
   bootstrap: [AppComponent]
