@@ -6,6 +6,7 @@ import {ChatClient} from './chat-client.model';
 import {ChatMessage} from './chat-message.model';
 import {WelcomeDto} from './welcome.dto';
 import {map} from 'rxjs/operators';
+import {JoinChatDto} from './join-chat.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,8 @@ export class ChatService {
       .fromEvent<ChatMessage[]>('allMessages');
   }
 
-  sendNickname(nickname: string): void {
-    this.socket.emit('nickname', nickname);
+  joinChat(dto: JoinChatDto): void {
+    this.socket.emit('joinChat', dto);
   }
   listenForClients(): Observable<ChatClient[]> { // listens for clients
     return this.socket
@@ -59,7 +60,7 @@ export class ChatService {
     return this.socket
       .fromEvent<string>('connect')
       .pipe(
-        map( (value) => {
+        map( () => {
           return this.socket.ioSocket.id;
         })
       );

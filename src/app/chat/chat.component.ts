@@ -5,6 +5,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {debounceTime, take, takeUntil} from 'rxjs/operators';
 import {ChatClient} from './shared/chat-client.model';
 import {ChatMessage} from './shared/chat-message.model';
+import {JoinChatDto} from './shared/join-chat.dto';
 
 
 @Component({
@@ -58,20 +59,20 @@ export class ChatComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$)
       )
-      .subscribe(welcome =>
-      {
+      .subscribe(welcome => {
         this.messages = welcome.messages;
         this.chatClient = this.chatService.chatClient = welcome.client;
         // use NGXS later rn its simple state using Singleton Service
       });
     if (this.chatService.chatClient){
-      this.chatService.sendNickname(this.chatService.chatClient.nickname);
+      this.chatService.joinChat({ id: this.chatService.chatClient.id, nickname: this.chatService.chatClient.nickname});
     }
     this.chatService.listenForConnect()
       .pipe(
         takeUntil(this.unsubscribe$)
       )
       .subscribe((id) => {
+        console.log('id', id);
         this.socketId = id;
       });
     this.chatService.listenForDisconnect()
@@ -79,6 +80,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((id) => {
+        console.log('disconnect id', id);
         this.socketId = id;
       });
   }
@@ -94,7 +96,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   sendNickname(): void {
     if (this.nickNameFC.value) {
-      this.chatService.sendNickname(this.nickNameFC.value);
+      const dto: JoinChatDto = { nickname: this.nickNameFC.value};
+      this.chatService.joinChat(dto);
     }
   }
 }
