@@ -81,7 +81,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       .subscribe((id) => {
         this.socketId = id;
       });
-
   }
     ngOnDestroy(): void {
     this.unsubscribe$.next();

@@ -55,10 +55,6 @@ export class ChatService {
     return this.socket
       .fromEvent<string>('error');
   }
-
-
-
-
   listenForConnect(): Observable<string> {
     return this.socket
       .fromEvent<string>('connect')
