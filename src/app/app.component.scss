@@ -1,8 +1,15 @@
 .nounderline {
-  text-decoration: none !important
+  text-decoration: none !important;
+  color:pink;
+  transform: scale(1.6);
+  font-family: "Heiti TC", fantasy ;
 }
 
 .link
 {
   color: lightpink;
+}
+
+.nav {
+  background: #424242;
 }
