@@ -20,7 +20,7 @@
     <mat-card fxFlex fxLayout="column">
       <mat-card-header>
         <h5 mat-line class="headers">Hello, <span style="color: pink"> {{chatClient.nickname}} </span> !
-        With id: <span class="pinkify"> {{chatClient.id}} </span> SocketId: {{socketId}} </h5>
+        With id: <span class="pinkify"> {{chatClient.id}} </span> </h5>
       </mat-card-header>
       <mat-card-content fxFlex fxLayout="column">
         <mat-list fxFlex class="chat-scroll">
@@ -45,8 +45,8 @@
         <span *ngIf="clientsTyping.length > 0"
               class="primary-text-color"
             style="font-size:15px">
-          <span *ngFor="let clients of clientsTyping; let i = index">
-                  {{clients.nickname}}
+          <span *ngFor="let client of clientsTyping; let i = index">
+                  {{client.nickname}}
             <span *ngIf="clientsTyping.length - 1 > i">
               ,
             </span>
@@ -80,7 +80,7 @@
         </mat-form-field>
       </mat-card-content>
     </mat-card>
-  </div>
+</div>
 <!-- Error -->
 <div fxLayout="row" fxFlex="10" fxLayoutAlign="center bottom" style="background: paleturquoise" *ngIf="error$ | async as error">
   <mat-card fxFlex="90" class="error">
@@ -88,9 +88,9 @@
         {{error}}
     </mat-card-footer>
   </mat-card>
-</div>
+ </div>
 <!-- Listen for connection -->
-<div fxLayout="row" fxFlex="10" fxLayoutAlign="center bottom" style="background: paleturquoise" *ngIf="!socketId">
+<div fxLayout="row" fxFlex="10" fxLayoutAlign="center bottom" style="background: paleturquoise" *ngIf="!clientsIds$">
   <mat-card fxFlex="90" class="error">
     <mat-card-footer class="error" fxLayoutAlign="center left">
       You are not connected!

@@ -5,7 +5,7 @@ import {ChatClient} from '../chat/shared/chat-client.model';
   providedIn: 'root'
 })
 export class StorageService {
-// State Managment saving and loading client from local storage
+// State Managment saving and loading client from local storage Not Used Anymore
   constructor() {}
 
   saveChatClient(chatClient: ChatClient): void {

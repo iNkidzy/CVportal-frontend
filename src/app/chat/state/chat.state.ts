@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {ChatClient} from '../shared/chat-client.model';
-import {ChatClientLoggedIn, ListenForClients, LoadClientFromStorage, StopListeningForClients, UpdateClients} from './chat.actions';
+import {
+  ChatClientLoggedIn,
+  ListenForClients,
+  LoadClientFromStorage,
+  StopListeningForClients, StopListeningForErrors,
+  UpdateClients
+} from './chat.actions';
 import {state} from '@angular/animations';
 import {Subscription} from 'rxjs';
 import {ChatService} from '../shared/chat.service';
@@ -10,6 +16,8 @@ export interface ChatStateModel {
   chatClients: ChatClient[];  // defining the types in state like a schema
   // later add properties from welcome dto
   loggedInClient: ChatClient | undefined;
+  errors: string[] | undefined;
+
 
 }
 @State<ChatStateModel>({
@@ -17,6 +25,7 @@ export interface ChatStateModel {
   defaults: {
     chatClients: [],
     loggedInClient: undefined,
+    errors: undefined,
       }
 })
 @Injectable()
@@ -39,11 +48,23 @@ export class ChatState { // Important! Every state u create add to app.module
   static clientIds(state: ChatStateModel): string[] {
     return state.chatClients.map(c => c.id);
   }
-
+  /*
+  @Selector()
+  static clientNicknames(state: ChatStateModel): string[] {
+    return state.chatClients.map(c => c.nickname);
+  }
+   */
   @Selector()
   static clientsOnline(state: ChatStateModel): number {
     return state.chatClients.length;
   }
+/*
+  @Selector()
+  static errors(state: ChatStateModel): string[] {
+    return state.errors?.map(c => c.replace())
+  }
+  */
+
 /*
   @Action(GetClients)   // Action Geting clients
   getClients(ctx: StateContext<ChatStateModel>): void { // Context gives access to our state and change that state
@@ -64,6 +85,16 @@ export class ChatState { // Important! Every state u create add to app.module
         ctx.dispatch(new UpdateClients(clients));
       });
      }
+
+  @Action(StopListeningForErrors)
+  stopListeningForErrors(ctx: StateContext<ChatStateModel>): void {
+     const state = ctx.getState()
+    const newState: ChatStateModel = {
+       errors: !(state.loggedInClient?.nickname),
+        ...state,
+    }
+       ctx.setState(newState);
+  }
 
   @Action(UpdateClients)
   updateClients(ctx: StateContext<ChatStateModel>, uc: UpdateClients): void {

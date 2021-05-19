@@ -6,16 +6,16 @@ import {ChatMessage} from './chat-message.model';
 import {WelcomeDto} from './welcome.dto';
 import {map} from 'rxjs/operators';
 import {JoinChatDto} from './join-chat.dto';
+import {MessageDto} from './message.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
   // using the service for a simple management state system rn
-  chatClient: ChatClient | undefined;
   constructor(private socket: SocketChat) { }
 
-  sendMessage(msg: string): void { // sends a message
+  sendMessage(msg: MessageDto): void {
     this.socket.emit('message', msg);
   }
 
@@ -59,7 +59,7 @@ export class ChatService {
     return this.socket
       .fromEvent<string>('connect')
       .pipe(
-        map( () => {
+        map( (value) => {
           return this.socket.ioSocket.id;
         })
       );
@@ -80,6 +80,5 @@ export class ChatService {
   connect(): void {
     this.socket.connect();
   }
-
 
 }
