@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Socket} from 'ngx-socket-io';
 import {Observable} from 'rxjs';
 import {SocketChat} from '../../app.module';
 import {ChatClient} from './chat-client.model';

@@ -1,4 +1,4 @@
-<div fxLayout="row" fxFlex *ngIf="chatClient" style="padding: 20px; background: paleturquoise" fxLayoutGap="10px">
+<div fxLayout="row" fxFlex *ngIf="chatClient$ | async as chatClient" style="padding: 20px; background: paleturquoise" fxLayoutGap="10px">
   <div fxLayout="column" fxFlex="20">
     <mat-card fxFlex>
       <mat-card-header>
@@ -60,7 +60,7 @@
 
 
 <!-- If not a user, enter Nickname -->
-<div fxLayout="row" fxFlex fxLayoutAlign="center center" style="background: paleturquoise" *ngIf="!chatClient">
+<div fxLayout="row" fxFlex fxLayoutAlign="center center" style="background: paleturquoise" *ngIf="!(chatClient$ | async) as chatClient">
     <mat-card fxFlex="30">
       <mat-card-header fxLayoutAlign="center center" >
         <div fxFlex="60">

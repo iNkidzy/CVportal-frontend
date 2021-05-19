@@ -8,6 +8,10 @@ import {Socket, SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from './shared/shared.module';
+import {NgxsModule} from '@ngxs/store';
+import {environment} from '../environments/environment';
+import {ChatState} from './chat/state/chat.state';
+import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 
 
 // Delete this and .forRoot(config) later
@@ -38,6 +42,10 @@ export class SocketChat extends Socket {
     BrowserAnimationsModule,
     MatButtonModule,
     SharedModule,
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production
+    }),
+    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [SocketCV, SocketChat],
   bootstrap: [AppComponent]

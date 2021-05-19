@@ -11,6 +11,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {NgxsModule} from '@ngxs/store';
+import {ChatState} from './state/chat.state';
 
 
 
@@ -28,6 +30,7 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    NgxsModule.forFeature([ChatState])
   ]
 })
 export class ChatModule { }

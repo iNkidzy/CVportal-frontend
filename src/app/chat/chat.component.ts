@@ -6,6 +6,9 @@ import {debounceTime, take, takeUntil} from 'rxjs/operators';
 import {ChatClient} from './shared/chat-client.model';
 import {ChatMessage} from './shared/chat-message.model';
 import {JoinChatDto} from './shared/join-chat.dto';
+import {ChatState} from './state/chat.state';
+import {Select, Store} from '@ngxs/store';
+import {ChatClientLoggedIn, ListenForClients, LoadClientFromStorage, StopListeningForClients} from './state/chat.actions';
 
 
 @Component({
@@ -14,19 +17,26 @@ import {JoinChatDto} from './shared/join-chat.dto';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
+  @Select(ChatState.clients) clients$: Observable<ChatClient[]> | undefined;
+  @Select(ChatState.clientIds) clientsIds$: Observable<string[]> | undefined;
+  @Select(ChatState.loggedInClient) chatClient$: Observable<ChatClient> | undefined;
+
   messageFC = new FormControl('');
   nickNameFC = new FormControl('');
+
   messages: ChatMessage[] = [];
   unsubscribe$ = new Subject(); // unsubscribes the subscription
-  clients$: Observable<ChatClient[]> | undefined;
-  chatClient: ChatClient | undefined;
+  //clients$: Observable<ChatClient[]> | undefined;
+  //chatClient: ChatClient | undefined;
   error$: Observable<string> | undefined;
   clientsTyping: ChatClient[] = [];
   socketId: string | undefined;
-  constructor(private chatService: ChatService) { }
+  constructor(private store: Store,
+              private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.clients$ = this.chatService.listenForClients();
+    // this.clients$ = this.chatService.listenForClients();
+    this.store.dispatch(new ListenForClients());
     this.error$ = this.chatService.listenForErrors();
     this.messageFC.valueChanges
       .pipe(
@@ -61,12 +71,18 @@ export class ChatComponent implements OnInit, OnDestroy {
       )
       .subscribe(welcome => {
         this.messages = welcome.messages;
-        this.chatClient = this.chatService.chatClient = welcome.client;
+        // this.chatClient = welcome.client;
+        this.store.dispatch(new ChatClientLoggedIn(welcome.client))
         // use NGXS later rn its simple state using Singleton Service
       });
-    if (this.chatService.chatClient){
-      this.chatService.joinChat({ id: this.chatService.chatClient.id, nickname: this.chatService.chatClient.nickname});
-    }
+    this.store.dispatch(new LoadClientFromStorage());
+    /*
+    if (oldClient){
+      this.chatService.joinChat({
+        id: oldClient.id, // this.chatService.chatClient
+        nickname: oldClient.nickname
+      });
+    } */
     this.chatService.listenForConnect()
       .pipe(
         takeUntil(this.unsubscribe$)
@@ -87,6 +103,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.store.dispatch(new StopListeningForClients());
      }
 
   sendMessage(): void {
