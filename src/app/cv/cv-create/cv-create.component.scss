@@ -1,12 +1,22 @@
-#cvheader{
-  margin-left: 600px;
+.content {
+    padding: 16px;
 
 }
-
-#formfields
-{
-  margin-left: 600px;
-
+.cardHeight {
+  height: 82vh;
+  width: 150vh;
 }
 
+.content-scroll {
+  overflow: auto;
+}
 
+.header {
+  color: pink;
+  font-size: 25px;
+  font-family: "Heiti TC", fantasy;
+}
+
+.fields {
+
+}
