@@ -9,7 +9,7 @@ import {CvService} from '../shared/cv.service';
   styleUrls: ['./cv-create.component.scss']
 })
 export class CvCreateComponent implements OnInit {
-  CVForm = new FormGroup({
+  CVForm = this.fb.group({
     name: new FormControl(''),
     description: new FormControl(''),
     education: new FormControl(''),

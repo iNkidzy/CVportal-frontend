@@ -12,6 +12,7 @@ import {NgxsModule} from '@ngxs/store';
 import {environment} from '../environments/environment';
 import {ChatState} from './chat/state/chat.state';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
+import {CvModule} from './cv/cv.module';
 
 
 // Delete this and .forRoot(config) later

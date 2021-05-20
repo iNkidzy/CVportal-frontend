@@ -1,5 +1,5 @@
 export interface CvDto {
-  id: string;
+  id?: string;
   name: string;
   education: string;
   skills: string;

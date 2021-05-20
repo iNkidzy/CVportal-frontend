@@ -9,18 +9,21 @@ import {take} from 'rxjs/operators';
   styleUrls: ['./cv.component.scss']
 })
 export class CvComponent implements OnInit {
-cv = new FormControl('');
-cvs: string[] = [];
-  constructor(private cvService: CvService) { }
 
-  ngOnInit(): void {
-    this.cvService.listenForCvs()
-      .subscribe( cv => {
-        this.cvs.push(cv);
-      });
-    this.cvService.getAllCvs().pipe(take(1)).subscribe(cvs => {
-      this.cvs = cvs;
-    });
-  }
+  //cv = new FormControl('');
+  //cvs: string[] = [];
 
+  constructor() { }
+
+  ngOnInit(): void {}
+/*
+  this.cvService.listenForCvs()
+.subscribe( cv => {
+  this.cvs.push(cv);
+});
+this.cvService.getAllCvs().pipe(take(1)).subscribe(cvs => {
+  this.cvs = cvs;
+});
+
+ */
 }
