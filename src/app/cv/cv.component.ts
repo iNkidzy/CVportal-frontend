@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CvService} from './shared/cv.service';
 import {FormControl} from '@angular/forms';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cv',
@@ -17,6 +18,9 @@ cvs: string[] = [];
       .subscribe( cv => {
         this.cvs.push(cv);
       });
+    this.cvService.getAllCvs().pipe(take(1)).subscribe(cvs => {
+      this.cvs = cvs;
+    });
   }
 
 }

@@ -6,6 +6,7 @@ import { CvComponent } from './cv.component';
 import { CvCreateComponent } from './cv-create/cv-create.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -18,7 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CommonModule,
     CvRoutingModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule
   ]
 })
 export class CvModule { }
