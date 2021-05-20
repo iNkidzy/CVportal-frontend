@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {CreateCvDto} from '../shared/create-cv.dto';
+import {CvService} from '../shared/cv.service';
 
 @Component({
   selector: 'app-cv-create',
@@ -16,13 +18,19 @@ export class CvCreateComponent implements OnInit {
     video: new FormControl(''),
   });
 
-  constructor() {
+  cvCreate: CreateCvDto | undefined;
+  constructor(private fb: FormBuilder, private cvService: CvService) {
   }
 
   ngOnInit(): void {
+    this.cvService.listenForCreate()
+      .subscribe(cvCreated => {
+        this.CVForm.reset();
+        this.cvCreate = cvCreated;
+      });
   }
-
-  onSubmit(): void {
-    console.log('hello');
+  createCv(): void{
+    const cvDto: CreateCvDto = this.CVForm.value;
+    this.cvService.create(cvDto);
   }
 }
