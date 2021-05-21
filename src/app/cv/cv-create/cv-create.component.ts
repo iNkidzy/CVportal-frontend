@@ -4,6 +4,7 @@ import {CreateCvDto} from '../shared/create-cv.dto';
 import {CvService} from '../shared/cv.service';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Router} from '@angular/router';
 export interface Skill {
   name: string;
 }
@@ -35,7 +36,7 @@ export class CvCreateComponent implements OnInit {
   });
 
   cvCreate: CreateCvDto | undefined;
-  constructor(private fb: FormBuilder, private cvService: CvService) {
+  constructor(private fb: FormBuilder, private cvService: CvService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -49,6 +50,12 @@ export class CvCreateComponent implements OnInit {
     const cvDto: CreateCvDto = this.CVForm.value;
     this.cvService.create(cvDto);
   }
+
+  Back(): void {  //Change this to something better later
+      console.log("Form Submitted!");
+      this.router.navigateByUrl('http://localhost:4200/cvs/create/');
+  }
+
   //ChipEvent
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
