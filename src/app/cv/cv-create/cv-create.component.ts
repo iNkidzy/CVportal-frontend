@@ -4,7 +4,7 @@ import {CreateCvDto} from '../shared/create-cv.dto';
 import {CvService} from '../shared/cv.service';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-export interface Fruit {
+export interface Skill {
   name: string;
 }
 @Component({
@@ -18,10 +18,10 @@ export class CvCreateComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [
-    {name: 'Lemon'},
-    {name: 'Lime'},
-    {name: 'Apple'},
+  skills: Skill[] = [
+    {name: 'Teamwork'},
+    {name: 'Communication'},
+    {name: 'Problem Solving'},
   ];
   CVForm = this.fb.group({
     name: new FormControl(''),
@@ -29,6 +29,7 @@ export class CvCreateComponent implements OnInit {
     education: new FormControl(''),
     experience: new FormControl(''),
     skills: new FormControl(''),
+    contact: new FormControl(''),
     image: new FormControl(''),
     video: new FormControl(''),
   });
@@ -48,23 +49,24 @@ export class CvCreateComponent implements OnInit {
     const cvDto: CreateCvDto = this.CVForm.value;
     this.cvService.create(cvDto);
   }
+  //ChipEvent
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     // Add our fruit
     if (value) {
-      this.fruits.push({name: value});
+      this.skills.push({name: value});
     }
     console.log(event);
     // Clear the input value
     event.input.value = '';
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
+  remove(skill: Skill): void {
+    const index = this.skills.indexOf(skill);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.skills.splice(index, 1);
     }
   }
 

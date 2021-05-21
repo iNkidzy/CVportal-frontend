@@ -6,10 +6,11 @@
         <h5 class="header">Create CV</h5>
       </mat-card-header>
       <mat-divider></mat-divider>
-      <mat-card-content fxLayoutGap="70px" class="content-scroll">
+      <mat-card-content fxLayoutGap="60px" class="content-scroll">
+        <form [formGroup]="CVForm">
           <mat-form-field appearance="standard" class="fields">
             <mat-label>Name</mat-label>
-            <input matInput type="text" [formGroup]="CVForm">
+            <input matInput type="text" formControlName="name">
           </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
@@ -21,17 +22,17 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Experience</mat-label>
-          <textarea matInput type="text" formControlName="education" ></textarea>
+          <textarea matInput type="text" formControlName="experience" ></textarea>
         </mat-form-field>
         <mat-form-field class="example-chip-list">
-          <mat-label>Favorite Fruits</mat-label>
-          <mat-chip-list #chipList aria-label="Fruit selection">
-            <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
-                      [removable]="removable" (removed)="remove(fruit)">
-              {{fruit.name}}
+          <mat-label>Personal Skills</mat-label>
+          <mat-chip-list #chipList  formControlName="skills" aria-label="Fruit selection">
+            <mat-chip *ngFor="let skill of skills" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(skill)">
+              {{skill.name}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="New fruit..."
+            <input placeholder="New skill..."
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
@@ -40,10 +41,11 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Contact</mat-label>
-          <textarea matInput type="text" formControlName="education" ></textarea>
+          <textarea matInput type="text" formControlName="contact"></textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary">Upload Image</button>
-        <button mat-raised-button color="primary">Upload Video</button>
+        <button mat-raised-button color="primary" formControlName="image">Upload Image</button>
+        <button mat-raised-button color="primary" formControlName="video">Upload Video</button>
+        </form>
         </mat-card-content>
       <mat-card-footer fxLayoutAlign="center center">
         <button mat-raised-button color="primary" type="submit" (click)="createCv()">Submit</button>
@@ -86,7 +88,7 @@
     <button style="color: darkgrey; background-color: whitesmoke; font-size: 35px; border-radius: 5px; border-color: gray"  type="submit" [disabled]="!CVForm.valid">Submit</button>
   </form> -->
    </div>
-</div>
+   </div>
 </div>
 
 <div *ngIf="cvCreate">
