@@ -40,20 +40,35 @@ export class CvCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Not used, because we get data directly from local storage
     this.cvService.listenForCreate()
       .subscribe(cvCreated => {
-        this.CVForm.reset();
         this.cvCreate = cvCreated;
       });
   }
   createCv(): void{
     const cvDto: CreateCvDto = this.CVForm.value;
-    this.cvService.create(cvDto);
+    this.cvCreate = cvDto;
+    // Get existing CVs from Local storage
+    let existingCV = localStorage.getItem("dataSource");
+    if (existingCV) {
+      // Parse the array from the local storage and assign it to a const
+      const arr = (JSON.parse(existingCV))
+      // Push the incoming form data to the existing array
+      arr.push(cvDto)
+      // Save the array with the newly added CV to local storage
+      localStorage.setItem('dataSource', JSON.stringify(arr));
+    } else {
+      this.cvService.create(cvDto);
+      localStorage.setItem('dataSource', JSON.stringify([cvDto]));
+    }
   }
 
   Back(): void {  //Change this to something better later
       console.log("Form Submitted!");
-      this.router.navigateByUrl('http://localhost:4200/cvs/create/');
+      this.router.navigateByUrl('http://localhost:4200/cvs/create/').then(res => {
+        console.log(res)
+      });
   }
 
   //ChipEvent

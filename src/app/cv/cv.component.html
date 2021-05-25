@@ -1,1 +1,25 @@
-<h4> CV IS HERE AND NOT ON HOME !</h4>
+<div fxLayout="row" fxFlex style="padding: 20px; background: paleturquoise" fxLayoutGap="10px">
+  <div fxLayout="column" fxFlex>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <h5 class="headers">Cv Posts</h5>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="content-scroll">
+            <mat-card *ngFor="let Cv of cvsArray">
+                <mat-card-content class="content-scroll">
+                 <h2> Name: {{Cv.name}} ---> Image: {{Cv.image}} </h2>
+                  <h3> Description: {{Cv.description}}</h3>
+                  <h3> Education: {{Cv.education}} </h3>
+                  <h3> Experience: {{Cv.experience}}</h3>
+                  <h3> Skills: {{Cv.skills}}</h3>
+                  <h3> Video: {{Cv.video}}</h3>
+                  <h3> Contact: {{Cv.contact}}</h3>
+                </mat-card-content>
+            </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
