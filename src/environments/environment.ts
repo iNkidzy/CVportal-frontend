@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
- // chatBackend: 'https://cvportalchatbackend.herokuapp.com'
+  chatBackend: 'https://cvportalchatappbackend.herokuapp.com'
 };
 
 /*

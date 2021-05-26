@@ -28,8 +28,7 @@ export class SocketCV extends Socket {
 @Injectable()
 export class SocketChat extends Socket {
   constructor() {
-    super({url: 'http://localhost:3100', options: {} });
-    // {url: environment.chatBackend, options:{}}
+    super({url: environment.chatBackend, options: {} });
   }
 }
 
