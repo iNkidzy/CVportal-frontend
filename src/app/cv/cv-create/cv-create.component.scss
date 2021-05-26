@@ -1,0 +1,40 @@
+.content {
+  padding: 16px;
+
+}
+.cardHeight {
+  height: 82vh;
+  width: 150vh;
+}
+
+.content-scroll {
+  overflow: auto;
+  width: 350px;
+  height: 550px;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  vertical-align:middle;
+
+}
+
+.header {
+  color: pink;
+  font-size: 25px;
+  font-family: "Heiti TC", fantasy;
+}
+
+.created-title {
+  color: lightgreen;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 0px;
+  font-size: 18px;
+  font-family: "Heiti TC", fantasy ;
+}
+#check {
+  color: lightgreen;
+}
+#submit{
+  margin-right: 170px;
+}

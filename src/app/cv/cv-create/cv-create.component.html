@@ -1,0 +1,66 @@
+<div class="content"  fxLayoutAlign="center center">
+<div fxLayout="row"  *ngIf="!cvCreate">
+  <div fxLayout="column" >
+    <mat-card class="cardHeight">
+      <mat-card-header fxLayoutAlign="center center">
+        <h5 class="header">Create CV</h5>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content fxLayoutGap="60px" class="content-scroll">
+        <form [formGroup]="CVForm">
+          <mat-form-field appearance="standard" class="fields">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput type="text" formControlName="description" ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Education</mat-label>
+          <textarea matInput type="text" formControlName="education" ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Experience</mat-label>
+          <textarea matInput type="text" formControlName="experience" ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Contact</mat-label>
+          <textarea matInput type="text" formControlName="contact"></textarea>
+        </mat-form-field>
+        </form>
+        </mat-card-content>
+      <mat-card-footer id="submit" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" type="submit" (click)="createCv()">Submit</button>
+      </mat-card-footer>
+    </mat-card>
+     </div>
+   </div>
+
+</div>
+<div fxLayout="row" fxFlex fxLayoutAlign="center center" *ngIf="cvCreate">
+  <mat-card fxFlex="30" fxLayoutAlign="center center">
+    <mat-card-header>
+    <div fxFlex="60">
+      <mat-card-title>
+        <h5 class="created-title">CV created!</h5>
+      </mat-card-title>
+    </div>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+      <h5 fxFlex>
+         <span id= "check" class="material-icons">
+            check_circle
+        </span>
+      </h5>
+    </mat-card-content>
+    <br>
+    <mat-card-footer fxLayoutAlign="center center" style="padding-top: 80px; padding-bottom: 20px">
+      <button mat-raised-button color="primary" (click)="Back()">Okay</button>
+    </mat-card-footer>
+  </mat-card>
+  </div>
+
+
+
