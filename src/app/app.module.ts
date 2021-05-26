@@ -22,7 +22,7 @@ import {CvModule} from './cv/cv.module';
 @Injectable()
 export class SocketCV extends Socket {
   constructor() {
-    super({url: 'http://localhost:3000', options: {} });
+    super({url: environment.cvBackend, options: {} });
   }
 }
 @Injectable()

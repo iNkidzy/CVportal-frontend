@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  cvBackend: 'https://cvportalbackend.herokuapp.com',
   chatBackend: 'https://cvportalchatappbackend.herokuapp.com'
 };
 
