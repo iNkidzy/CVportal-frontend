@@ -20,15 +20,9 @@ import {CvModule} from './cv/cv.module';
 // const configChatBackend: SocketIoConfig = {url: 'http://localhost:3100', options: {} };
 
 @Injectable()
-export class SocketCV extends Socket {
-  constructor() {
-    super({url: environment.cvBackend, options: {} });
-  }
-}
-@Injectable()
 export class SocketChat extends Socket {
   constructor() {
-    super({url: environment.chatBackend, options: {} });
+    super({url: environment.cvchatBackend, options: {} });
   }
 }
 
@@ -48,7 +42,7 @@ export class SocketChat extends Socket {
     }),
     NgxsLoggerPluginModule.forRoot(),
   ],
-  providers: [SocketCV, SocketChat],
+  providers: [SocketChat],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

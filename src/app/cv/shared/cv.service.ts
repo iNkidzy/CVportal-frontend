@@ -3,18 +3,15 @@ import {Socket} from 'ngx-socket-io';
 import {Observable} from 'rxjs';
 import {CreateCvDto} from './create-cv.dto';
 import {CvDto} from './cv.dto';
-import {SocketCV} from '../../app.module';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CvService {
 
-  constructor(private socketCv: SocketCV) {}
+  constructor() {}
 
-  create(cv: CreateCvDto): void{
-    this.socketCv.emit('create-cv', cv);
-  }
 
   getAllCvs(): Array<CvDto> {
     // get CV data from the browser's local storage

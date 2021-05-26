@@ -39,7 +39,6 @@ export class CvCreateComponent implements OnInit {
       // Save the array with the newly added CV to local storage
       localStorage.setItem('dataSource', JSON.stringify(arr));
     } else {
-      this.cvService.create(cvDto);
       localStorage.setItem('dataSource', JSON.stringify([cvDto]));
     }
   }
