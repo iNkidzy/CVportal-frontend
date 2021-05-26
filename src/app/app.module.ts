@@ -22,7 +22,7 @@ import {CvModule} from './cv/cv.module';
 @Injectable()
 export class SocketChat extends Socket {
   constructor() {
-    super({url: environment.cvchatBackend, options: {} });
+    super({url: environment.chatBackend, options: {} });
   }
 }
 
