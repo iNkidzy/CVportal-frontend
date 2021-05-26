@@ -15,14 +15,7 @@ export class CvService {
   create(cv: CreateCvDto): void{
     this.socketCv.emit('create-cv', cv);
   }
-  listenForCreate(): Observable<CvDto> {
-    return this.socketCv.fromEvent<CvDto>('cv-created');
-  }
 
-  listenForCvs(): Observable<string> {
-    return this.socketCv
-      .fromEvent<string>('cvs');
-  }
   getAllCvs(): Array<CvDto> {
     // get CV data from the browser's local storage
     const data = localStorage.getItem("dataSource");

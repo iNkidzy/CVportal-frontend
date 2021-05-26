@@ -10,7 +10,6 @@ import {MatInputModule} from '@angular/material/input';
 import {SharedModule} from '../shared/shared.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonModule} from '@angular/material/button';
 
 
@@ -30,7 +29,6 @@ import {MatButtonModule} from '@angular/material/button';
     SharedModule,
     MatCardModule,
     MatDividerModule,
-    MatChipsModule,
     MatButtonModule,
   ]
 })

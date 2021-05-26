@@ -1,5 +1,5 @@
 .content {
-    padding: 16px;
+  padding: 16px;
 
 }
 .cardHeight {
@@ -26,9 +26,15 @@
 
 .created-title {
   color: lightgreen;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 0px;
   font-size: 18px;
   font-family: "Heiti TC", fantasy ;
 }
 #check {
   color: lightgreen;
+}
+#submit{
+  margin-right: 170px;
 }

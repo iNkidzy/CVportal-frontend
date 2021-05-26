@@ -8,13 +8,11 @@
       <mat-card-content class="content-scroll">
             <mat-card *ngFor="let Cv of cvsArray">
                 <mat-card-content class="content-scroll">
-                 <h2> Name: {{Cv.name}} ---> Image: {{Cv.image}} </h2>
-                  <h3> Description: {{Cv.description}}</h3>
-                  <h3> Education: {{Cv.education}} </h3>
-                  <h3> Experience: {{Cv.experience}}</h3>
-                  <h3> Skills: {{Cv.skills}}</h3>
-                  <h3> Video: {{Cv.video}}</h3>
-                  <h3> Contact: {{Cv.contact}}</h3>
+                 <h2 style="color: pink"> Name: <span style="color:hotpink"> {{Cv.name}}</span> </h2>
+                  <h3 style="color: cornflowerblue"> Description: <span style="color:hotpink"> {{Cv.description}} </span></h3>
+                  <h3 style="color: cornflowerblue"> Education: <span style="color:hotpink">{{Cv.education}}</span> </h3>
+                  <h3 style="color: cornflowerblue"> Experience:<span style="color:hotpink"> {{Cv.experience}}</span></h3>
+                  <h3 style="color: cornflowerblue"> Contact: <span style="color:hotpink">{{Cv.contact}}</span></h3>
                 </mat-card-content>
             </mat-card>
       </mat-card-content>
