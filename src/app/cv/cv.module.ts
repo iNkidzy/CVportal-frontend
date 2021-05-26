@@ -6,7 +6,12 @@ import { CvComponent } from './cv.component';
 import { CvCreateComponent } from './cv-create/cv-create.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {SharedModule} from '../shared/shared.module';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -20,7 +25,11 @@ import {MatCardModule} from '@angular/material/card';
     CvRoutingModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatCardModule
+    MatInputModule,
+    SharedModule,
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule,
   ]
 })
 export class CvModule { }

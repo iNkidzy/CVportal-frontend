@@ -1,4 +1,16 @@
-.menu
-{
-  text-underline: none;
+.headers {
+  color: pink;
+  font-size: 25px;
+  font-family: "Heiti TC", fantasy;
+
+}
+
+.content-scroll {
+  overflow: auto;
+  width: 1050px;
+  height: 600px;
+  display: inline-block;
+  margin-left:200px;
+  vertical-align:middle;
+  padding: 0;
 }

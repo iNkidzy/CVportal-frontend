@@ -1,3 +1,23 @@
-<h4 *ngFor="let cv of cvs">
-  {{cvs}}
-</h4>
+<div fxLayout="row" fxFlex style="padding: 20px; background: paleturquoise" fxLayoutGap="10px">
+  <div fxLayout="column" fxFlex>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <h5 class="headers">Cv Posts</h5>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="content-scroll">
+            <mat-card *ngFor="let Cv of cvsArray">
+                <mat-card-content class="content-scroll">
+                 <h2 style="color: pink"> Name: <span style="color:hotpink"> {{Cv.name}}</span> </h2>
+                  <h3 style="color: cornflowerblue"> Description: <span style="color:hotpink"> {{Cv.description}} </span></h3>
+                  <h3 style="color: cornflowerblue"> Education: <span style="color:hotpink">{{Cv.education}}</span> </h3>
+                  <h3 style="color: cornflowerblue"> Experience:<span style="color:hotpink"> {{Cv.experience}}</span></h3>
+                  <h3 style="color: cornflowerblue"> Contact: <span style="color:hotpink">{{Cv.contact}}</span></h3>
+                </mat-card-content>
+            </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
